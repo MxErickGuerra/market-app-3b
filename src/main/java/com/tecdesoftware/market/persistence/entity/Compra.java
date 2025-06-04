@@ -1,6 +1,8 @@
-package com.tecdesoftware.market.persistance.entity;
+package com.tecdesoftware.market.persistence.entity;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "compras")
@@ -19,8 +21,17 @@ public class Compra {
     private String medioPago;
 
     private String comentario;
-
     private String estado;
+
+    //Relación con la entidad Cliente: Muchas complras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn (name="id_cliente", insertable=false, updatable=false)
+    private Cliente cliente;
+
+    //Relación con la entidad CompraProducto: Una compra con muchos productos
+    @OneToMany(mappedBy = "producto")
+    private List<Producto> productos;
 
     public Integer getIdCompra() {
         return idCompra;
