@@ -23,7 +23,7 @@ public class Compra {
     private String comentario;
     private String estado;
 
-    //Relación con la entidad Cliente: Muchas complras a un cliente
+    //Relación con la entidad Cliente: Muchas compras a un cliente
     @ManyToOne
     //No quiero que se modifique la entidad cliente, solo relacionarla
     @JoinColumn (name="id_cliente", insertable=false, updatable=false)
@@ -71,5 +71,21 @@ public class Compra {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
