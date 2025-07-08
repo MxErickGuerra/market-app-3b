@@ -2,6 +2,7 @@ package com.tecdesoftware.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,7 @@ public class Compra {
 
     @Column(name="id_cliente")
     private Integer idCliente;
+    private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
     private String medioPago;
@@ -30,7 +32,7 @@ public class Compra {
     private Cliente cliente;
 
     //Relación con la entidad CompraProducto: Una compra con muchos productos
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra")
     private List<Producto> productos;
 
     public Integer getIdCompra() {
@@ -49,6 +51,15 @@ public class Compra {
         this.idCliente = idCliente;
     }
 
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+
     public String getMedioPago() {
         return medioPago;
     }
@@ -61,31 +72,4 @@ public class Compra {
         return comentario;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
 }

@@ -3,7 +3,7 @@ package com.tecdesoftware.market.domain;
 public class Category {
 
     private int categoryId;
-    private String CategoryName;
+    private String category;
     private boolean active;
 
     public int getCategoryId() {
@@ -14,12 +14,12 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getCategoryName() {
-        return CategoryName;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryName(String categoryName) {
-        CategoryName = categoryName;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public boolean isActive() {
