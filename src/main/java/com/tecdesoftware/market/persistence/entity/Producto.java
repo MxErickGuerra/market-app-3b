@@ -11,12 +11,12 @@ public class Producto
         //Autogenera Ids autoincrementables
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="id_producto")
-        private int idProducto;
+        private Integer idProducto;
 
         private String nombre;
 
         @Column(name="id_categoria")
-        private int idCategoria;
+        private Integer idCategoria;
 
         @Column(name="codigo_barras")
         private String codigoBarras;
@@ -25,7 +25,7 @@ public class Producto
         private Double precioVenta;
 
         @Column(name="cantidad_stock")
-        private Integer cantidadStock;
+        private int cantidadStock;
 
         private Boolean estado;
 
@@ -33,29 +33,12 @@ public class Producto
     @JoinColumn(name = "id_categoria",insertable = false,updatable = false)
     private Categoria categoria;
 
-
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getCodigoBarras() {
@@ -96,5 +79,25 @@ public class Producto
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public void setCantidadStock(int cantidadStock) {
+        this.cantidadStock = cantidadStock;
     }
 }
