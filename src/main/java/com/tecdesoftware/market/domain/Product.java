@@ -1,13 +1,12 @@
 package com.tecdesoftware.market.domain;
 
 public class Product {
-
     private Integer productId;
     private String name;
     private Integer categoryId;
     private double price;
     private int stock;
-    private boolean active;
+    private  boolean active;
     private Category category;
 
     public Integer getProductId() {

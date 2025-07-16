@@ -6,40 +6,40 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table (name = "compras")
+@Table(name="compras")
 public class Compra {
-
-    @Id //Llave primaria
-    //Hace el id autoincremental
+    @Id //LLave primaria
+    //Autogenera Ids autoincrementables
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
-    private Integer idCompra;
+    private int idCompra;
 
-    @Column(name="id_cliente")
+    @Column(name = "id_cliente")
     private Integer idCliente;
+
     private LocalDateTime fecha;
 
     @Column(name = "medio_pago")
     private String medioPago;
 
     private String comentario;
-    private String estado;
 
-    //Relación con la entidad Cliente: Muchas compras a un cliente
+    private Boolean estado;
+
+    //Relación con Cliente: Muchas compras para un cliente
     @ManyToOne
-    //No quiero que se modifique la entidad cliente, solo relacionarla
-    @JoinColumn (name="id_cliente", insertable=false, updatable=false)
+    //Intertable//Updatable en false es para que no haya modificaciones
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
-    //Relación con la entidad CompraProducto: Una compra con muchos productos
     @OneToMany(mappedBy = "compra")
-    private List<Producto> productos;
+    private List<CompraProducto> productos;
 
-    public Integer getIdCompra() {
+    public int getIdCompra() {
         return idCompra;
     }
 
-    public void setIdCompra(Integer idCompra) {
+    public void setIdCompra(int idCompra) {
         this.idCompra = idCompra;
     }
 
@@ -59,7 +59,6 @@ public class Compra {
         this.fecha = fecha;
     }
 
-
     public String getMedioPago() {
         return medioPago;
     }
@@ -72,4 +71,34 @@ public class Compra {
         return comentario;
     }
 
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<CompraProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<CompraProducto> productos) {
+        this.productos = productos;
+    }
 }
+
+
+

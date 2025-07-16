@@ -3,43 +3,35 @@ package com.tecdesoftware.market.persistence.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "productos")
-public class Producto {
+@Table(name="productos")
+public class Producto
 
-    @Id //Llave primaria
-    //Hace el id autoincremental
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
-    private Integer idProducto;
+{
+        @Id //LLave primaria
+        //Autogenera Ids autoincrementables
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name="id_producto")
+        private Integer idProducto;
 
-    private String nombre;
+        private String nombre;
 
-    @Column(name="id_categoria")
-    private Integer idCategoria;
+        @Column(name="id_categoria")
+        private Integer idCategoria;
 
-    @Column(name = "codigo_barras")
-    private String codigoBarras;
+        @Column(name="codigo_barras")
+        private String codigoBarras;
 
-    @Column(name = "precio_venta")
-    private Double precioVenta;
+        @Column(name="precio_venta")
+        private Double precioVenta;
 
-    @Column(name = "cantidad_stock")
-    private Integer cantidadStock;
+        @Column(name="cantidad_stock")
+        private int cantidadStock;
 
-    private Boolean estado;
+        private Boolean estado;
 
-    //Relación con la entidad Categoría
     @ManyToOne
-    @JoinColumn (name="id_categoria", insertable=false, updatable=false)
+    @JoinColumn(name = "id_categoria",insertable = false,updatable = false)
     private Categoria categoria;
-
-    public Integer getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(Integer idProducto) {
-        this.idProducto = idProducto;
-    }
 
     public String getNombre() {
         return nombre;
@@ -47,14 +39,6 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getCodigoBarras() {
@@ -95,5 +79,25 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public void setCantidadStock(int cantidadStock) {
+        this.cantidadStock = cantidadStock;
     }
 }

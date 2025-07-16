@@ -5,28 +5,28 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="cliente")
+@Table(name="clientes")
 public class Cliente {
-
-    @Id //Indica que es PK
-    private String id;
+    @Id
+    //Porque el ID será la CURP @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String nombre;
-    private String apellidos;
-    private Long celular;
-    private String dirección;
+    private String apellido;
+    private Long celular; //Se almacena como número grande 9992896754
+    private String direccion;
 
-    @Column(name="correo_electronico")
+    @Column (name="correo_electronico")
     private String correoElectronico;
 
-    //Aqui se conecta con la entidad Compra
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany (mappedBy="cliente")
     private List<Compra> compras;
 
-    public String getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,12 +38,12 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public Long getCelular() {
@@ -54,12 +54,12 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public String getDirección() {
-        return dirección;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDirección(String dirección) {
-        this.dirección = dirección;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getCorreoElectronico() {

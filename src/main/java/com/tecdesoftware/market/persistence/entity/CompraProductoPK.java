@@ -1,15 +1,11 @@
 package com.tecdesoftware.market.persistence.entity;
 
-//Para unir las dos llaves y crear una llave compuesta
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Id;
-
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
-
 public class CompraProductoPK implements Serializable {
 
     @Column(name= "id_compra")
@@ -32,5 +28,19 @@ public class CompraProductoPK implements Serializable {
 
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompraProductoPK)) return false;
+        CompraProductoPK that = (CompraProductoPK) o;
+        return idCompra == that.idCompra &&
+                idProducto == that.idProducto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCompra, idProducto);
     }
 }

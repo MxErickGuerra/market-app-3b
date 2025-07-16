@@ -2,43 +2,55 @@ package com.tecdesoftware.market.web.controller;
 
 import com.tecdesoftware.market.domain.Product;
 import com.tecdesoftware.market.domain.service.ProductService;
-import com.tecdesoftware.market.persistence.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-//Le dice a Spring que va a ser el controlador de una API REST
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    //Inyectar el servicio
+
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductoRepository productoRepository;
 
-    @GetMapping("/all")
-    public List<Product> getAll() {
-        return productService.getAll();
+    // GET /products
+    @GetMapping
+    public ResponseEntity<List<Product>> getAll() {
+        return ResponseEntity.ok(productService.getAll());
     }
 
-    public Optional<Product> getProduct(int productId) {
-        return productService.getProduct(productId);
+    // GET /products/{productId}
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProduct(@PathVariable("productId") int productId) {
+        return productService.getProduct(productId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public Optional<List<Product>> getByCategory(int categoryId) {
-        return productService.getByCategory(categoryId);
+    // GET /products/category/{categoryId}
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
+        return productService.getByCategory(categoryId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    public Product save(Product product) {
-        return productService.save(product);
+    // POST /products
+    @PostMapping
+    public ResponseEntity<Product> save(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.save(product));
     }
 
-    public boolean delete(int productId) {
-        return productService.delete(productId);
+    // DELETE /products/{productId}
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<Void> delete(@PathVariable("productId") int productId) {
+        if (productService.delete(productId)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
