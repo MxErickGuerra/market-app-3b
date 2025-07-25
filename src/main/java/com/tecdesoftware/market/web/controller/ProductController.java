@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin(origins= "*")
+//Le dice a Spring que a va a se el controlador de una API REST
 @RestController
 @RequestMapping("/products")
 @Tag(name = "Product controller", description = "Manage products in the store")
@@ -110,6 +113,13 @@ public class ProductController {
 
     // DELETE /products/{productId}
     @DeleteMapping("/{productId}")
+    @Operation(summary = "Delete a product by ID", description = "Deletes a product if it exists")
+    @ApiResponse(responseCode = "200", description = "Product deleted successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid product ID")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
+    @ApiResponse(responseCode = "404", description = "Product not found")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<Void> delete(@PathVariable("productId") int productId) {
         if (productService.delete(productId)) {
             return ResponseEntity.ok().build();
