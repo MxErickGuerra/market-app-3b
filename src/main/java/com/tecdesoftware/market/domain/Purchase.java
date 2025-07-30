@@ -7,9 +7,10 @@ public class Purchase {
     private int purchaseId;
     private String clientId;
     private LocalDateTime date;
+    private String paymentMethod; // Nuevo campo necesario
     private String comment;
     private String state;
-    private List<PurchaseItem> items;
+    private List<PurchaseItem> item; // Cambiado de items a item
 
     public int getPurchaseId() {
         return purchaseId;
@@ -52,10 +53,10 @@ public class Purchase {
     }
 
     public List<PurchaseItem> getItem() {
-        return items;
+        return item;
     }
 
     public void setItem(List<PurchaseItem> item) {
-        this.items = item;
+        this.item = item;
     }
 }

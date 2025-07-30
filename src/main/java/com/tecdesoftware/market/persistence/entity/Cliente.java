@@ -8,19 +8,19 @@ import java.util.List;
 @Table(name="clientes")
 public class Cliente {
     @Id
-    //Porque el ID será la CURP @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id; // Se mantiene como Integer
     private String nombre;
     private String apellido;
-    private Long celular; //Se almacena como número grande 9992896754
+    private Long celular;
     private String direccion;
 
-    @Column (name="correo_electronico")
+    @Column(name="correo_electronico")
     private String correoElectronico;
 
-    @OneToMany (mappedBy="cliente")
+    @OneToMany(mappedBy="cliente")
     private List<Compra> compras;
 
+    private String contrasena;
 
     public Integer getId() {
         return id;
@@ -68,5 +68,21 @@ public class Cliente {
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

@@ -7,11 +7,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-
 @Mapper(componentModel = "spring", uses = {ProductMapper.class})
 public interface PurchaseItemMapper {
     @Mappings({
-            @Mapping(source = "id.idProducto", target = "productoId"),
+            @Mapping(source = "id.idProducto", target = "productId"), // Cambiado a productId
             @Mapping(source = "cantidad", target = "quantity"),
             @Mapping(source = "estado", target = "active")
     })

@@ -8,14 +8,13 @@ import java.util.List;
 @Entity
 @Table(name="compras")
 public class Compra {
-    @Id //LLave primaria
-    //Autogenera Ids autoincrementables
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
-    private int idCompra;
+    private Integer idCompra;
 
     @Column(name = "id_cliente")
-    private Integer idCliente;
+    private Integer idCliente; // Cambiado a Integer para coincidir con Cliente
 
     private LocalDateTime fecha;
 
@@ -23,26 +22,16 @@ public class Compra {
     private String medioPago;
 
     private String comentario;
-
     private Boolean estado;
 
-    //Relación con Cliente: Muchas compras para un cliente
     @ManyToOne
-    //Intertable//Updatable en false es para que no haya modificaciones
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "compra")
     private List<CompraProducto> productos;
 
-    public int getIdCompra() {
-        return idCompra;
-    }
-
-    public void setIdCompra(int idCompra) {
-        this.idCompra = idCompra;
-    }
-
+    // Getters y Setters (asegúrate que getIdCliente() devuelva Integer)
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -98,7 +87,12 @@ public class Compra {
     public void setProductos(List<CompraProducto> productos) {
         this.productos = productos;
     }
+
+    public Integer getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(Integer idCompra) {
+        this.idCompra = idCompra;
+    }
 }
-
-
-
